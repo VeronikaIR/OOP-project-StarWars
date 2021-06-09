@@ -3,7 +3,7 @@
 #include <fstream>
 #pragma warning(disable : 4996)
 
-Rank determinRank(const char* _rank) {  ///da sloja vutreeee
+Rank Jedai::determinRank(const char* _rank) {
 	if (strcmp(_rank, "Youngling") == 0) {
 		return Rank::Youngling;
 	}
@@ -35,7 +35,7 @@ Rank determinRank(const char* _rank) {  ///da sloja vutreeee
 	}
 }
 
-Rank  determinRank(const myString& _rank) {  ///da sloja vutreeee
+Rank Jedai::determinRank(const myString& _rank) {
 	if (_rank == "Youngling") {
 		return Rank::Youngling;
 	}
@@ -96,7 +96,7 @@ char* EnumToCharArray(Rank rank, char* rankType) { //da sloja vutreeeee
 		return rankType;
 	}
 	else if (rank == Rank::Knight) {
-		strcpy(rankType, "Kinght");
+		strcpy(rankType, "Knight");
 		return rankType;
 	}
 
@@ -120,48 +120,11 @@ void Jedai::copy(const Jedai& other) {
 	this->set_jedai_strenght(other.jedai_strenght);
 }
 
-/*
-void Jedai::destroy() {
-	//delete[] jedai_name;
-	//jedai_name = nullptr;
-	//delete[] saber_color;
-	//saber_color = nullptr;
-}
-*/
-
-
 Jedai::Jedai() {
-	//jedai_name = nullptr;
 	jedai_rank = Rank::Youngling;
 	jedai_age = 0;
-	//saber_color = nullptr;
 	jedai_strenght = 0;
 }
-
-/*
-Jedai::~Jedai()
-{
-	//delete[] jedai_name;
-	//jedai_name = nullptr;
-	//delete[] saber_color;
-	// = nullptr;
-}
-*/
-
-/*
-void Jedai::set_jedai_name(const char* _jedai_name) {
-	if (_jedai_name == nullptr)
-	{
-		return;
-	}
-	//if (this->jedai_name != nullptr) {
-	//	delete[] this->jedai_name;
-	//}
-	this->jedai_name = new char[strlen(_jedai_name) + 1];
-	strcpy(jedai_name, _jedai_name);
-}
-*/
-
 
 void Jedai::set_jedai_name(const char* _jedai_name) {  ///???????
 	this->jedai_name.set_string(_jedai_name);
@@ -224,18 +187,48 @@ void Jedai::set_jedai_strenght(const double _jedai_strenght) {
 
 }
 
-/*
-char* Jedai::get_jedai_name()const {
-	return this->jedai_name;
-}
-*/
-
 const myString& Jedai::get_jedai_name()const {
 	return this->jedai_name;
 }
 
 Rank Jedai::get_jedai_rank()const {
 	return this->jedai_rank;
+}
+
+myString& Jedai::getRankChar()const {
+	myString toReturn;
+	if (this->get_jedai_rank() == Rank::Youngling) {
+		toReturn.set_string("Youngling");
+		return toReturn;
+	}
+	else if (this->get_jedai_rank() == Rank::Initate) {
+		toReturn.set_string("Initate");
+		return toReturn;
+	}
+	else if (this->get_jedai_rank() == Rank::Padawan) {
+		toReturn.set_string("Padawan");
+		return toReturn;
+	}
+	else if (this->get_jedai_rank() == Rank::Knight_Aspirant) {
+		toReturn.set_string("Knight_Aspirant");
+		return toReturn;
+	}
+	else if (this->get_jedai_rank() == Rank::Knight) {
+		toReturn.set_string("Knight");
+		return toReturn;
+	}
+	else if (this->get_jedai_rank() == Rank::Master) {
+		toReturn.set_string("Master");
+		return toReturn;
+	}
+	else if (this->get_jedai_rank() == Rank::Battle_Master) {
+		toReturn.set_string("Battle_Master");
+		return toReturn;
+	}
+	else if (this->get_jedai_rank() == Rank::Grand_Master) {
+		toReturn.set_string("Grand_Master");
+		return toReturn;
+	}	
 }
 
 size_t Jedai::get_jedai_age()const {
@@ -256,7 +249,6 @@ Jedai::Jedai(const Jedai& other) {
 
 const Jedai& Jedai:: operator=(const Jedai& other) {
 	if (this != &other) {
-		//this->destroy();
 		this->copy(other);
 	}
 	return *this;
@@ -278,7 +270,6 @@ Jedai::Jedai(const myString& _name, const myString& _rank, const int _age, const
 	this->set_jedai_age(_age);
 	this->set_saber_color(_color);
 	this->set_jedai_strenght(_strenght);
-
 }
 
 bool Jedai::chekRank()const {
@@ -286,7 +277,6 @@ bool Jedai::chekRank()const {
 	if (!(this->get_jedai_rank() == Rank::Youngling || this->get_jedai_rank() == Rank::Initate || this->get_jedai_rank() == Rank::Padawan || this->get_jedai_rank() == Rank::Knight_Aspirant || this->get_jedai_rank() == Rank::Knight || this->get_jedai_rank() == Rank::Master || this->get_jedai_rank() == Rank::Battle_Master || this->get_jedai_rank() == Rank::Grand_Master)) {
 		return false;
 	}
-
 	return true;
 }
 
@@ -296,7 +286,6 @@ bool Jedai::chekColor()const {
 	}
 	else return true;
 }
-
 
 std::istream& operator>>(std::istream& in, Jedai& jedai) {
 	std::cout << "Enter the name of the Jedai : " << std::endl;
@@ -323,7 +312,6 @@ std::istream& operator>>(std::istream& in, Jedai& jedai) {
 	std::cout << "Enter Jedai's strength (strength must be real number) : " << std::endl;
 	double jediStrength;
 	in >> jediStrength;
-	//if(strength != real number)
 	jedai.set_jedai_strenght(jediStrength);
 
 	return in;

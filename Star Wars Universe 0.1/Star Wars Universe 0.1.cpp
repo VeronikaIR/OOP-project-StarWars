@@ -9,6 +9,5 @@ int main()
     Realize realization;
     realization.startUp();
 
-
     return 0;
 }

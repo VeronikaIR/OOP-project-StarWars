@@ -31,12 +31,6 @@ void Planet::set_planetName(const char* _planetName) {
 	this->planetName.set_string(_planetName);
 }
 
-/*
-void Planet::set_jedaiList(const myVector<Jedai> _jedaiList) {
-	this->jedaiList = _jedaiList;
-}
-*/
-
 void Planet::set_jedaiList(Jedai& curJedi) {
 	this->jedaiList.addElement(curJedi);
 }
@@ -53,16 +47,6 @@ int Planet::get_sizeOfJedaiList()const {
 myVector<Jedai>& Planet::get_jedaiList() {
 	return this->jedaiList;
 }
-
-/*
-void Planet::Print() {
-
-	std::cout << this->planetName << std::endl;
-	for (int i = 0; i < jedaiList.get_curSize(); ++i) {
-	//	std::cout << jedaiList.set_curSize] << std::endl;
-	}
-}
-*/
 
 Planet& Planet::operator=(const Planet& other) {
 	if (this != &other) {

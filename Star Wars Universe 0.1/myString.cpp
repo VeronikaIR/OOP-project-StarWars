@@ -20,7 +20,6 @@ void myString::resize() {
 void myString::copy(const myString& other) {
 	this->string_size = other.string_size;
 	this->string_capacity = other.string_capacity;
-	//delete[] this->string;
 	this->string = new char[this->string_capacity + 1];
 	for (int i = 0; i < this->string_size; i++)
 	{
@@ -35,13 +34,6 @@ void myString::set_string(const char* _string) {
 	this->string_size = strlen(_string);
 }
 
-//???
-/*
-void myString::set_string_capacity(const size_t _capacity) {
-	this->string_capacity = _capacity;
-}
-*/
-
 char* myString::get_string()const {
 	return this->string;
 }
@@ -49,12 +41,6 @@ char* myString::get_string()const {
 int myString::get_string_size()const {
 	return this->string_size;
 }
-
-/*
-size_t myString::get_string_capacity()const {
-	return this->string_capacity;
-}
-*/
 
 myString::myString() {
 	this->string = nullptr;
@@ -241,9 +227,7 @@ myVector<myString> myString::split(const char& symbol) {
 		vector.addElement(currString);
 		j++;
 	}
-
 	return vector;
-
 }
 
 int myString::toInt() {
@@ -302,7 +286,6 @@ bool myString::isDigit()const {
 }
 
 std::istream& operator>>(std::istream& in, myString& _string) {
-	std::cout << "Enter your string: " << std::endl;
 	char buff[64];
 	in.getline(buff, 64);
 	_string.set_string(buff);

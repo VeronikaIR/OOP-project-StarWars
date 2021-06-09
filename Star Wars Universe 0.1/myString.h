@@ -12,18 +12,11 @@ private:
 	void destroy();
 	void copy(const myString&);
 	void resize();
-	//char* copyDynamic(const myString&);
 
 public:
-
 	void set_string(const char*);
-	//void set_string_capacity(const size_t);
-
 	char* get_string()const;
 	int get_string_size()const;
-	//size_t get_string_capacity()const;
-
-
 	myString();
 	myString(const myString&);
 	myString& operator=(const myString&);

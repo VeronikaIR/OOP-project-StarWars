@@ -15,25 +15,17 @@ enum class Rank {
 	Grand_Master
 };
 
-Rank determinRank(const char* _rank);
-Rank determinRank(const myString& _rank);
-
 class Jedai {
-private:   //private dates
-	myString jedai_name;  //change jedai_name -> to myString
+private:  
+	myString jedai_name;
 	Rank jedai_rank;
 	size_t jedai_age;
 	myString saber_color;
 	double jedai_strenght;
-
 	void copy(const Jedai&);
-	//void destroy(); 
 
-public:             //public functions
-	Jedai();		//default constructor
-	//~Jedai();        //destructor
-
-	//srtters
+public:
+	Jedai();		
 	void set_jedai_name(const char*);
 	void set_jedai_name(const myString&);
 	void set_jedai_rank(const char*);
@@ -45,9 +37,6 @@ public:             //public functions
 	void set_saber_color(const myString&);
 	void set_jedai_strenght(const double);
 
-	//getters
-
-	//char* get_jedai_name()const;
 	const myString& get_jedai_name()const;
 	Rank get_jedai_rank()const;
 	size_t get_jedai_age()const;
@@ -55,27 +44,16 @@ public:             //public functions
 	double get_jedai_strenght()const;
 	bool chekRank()const;
 	bool chekColor()const;
-
-
-	//Rank determinRank(const char* _rank);
-	//Rank determinRank(const myString& _rank);
-
-	//Rank determinRank(const char* _rank);
-
-
-	Jedai(const Jedai&);				                                      //copy constructor
-	const Jedai& operator=(const Jedai&);                                           //overloaded operator=
-	Jedai(const char*, const char*, const size_t, const char*, const double);//constructior with parameters
+	myString& getRankChar()const;
+	Rank determinRank(const char* _rank);
+	Rank determinRank(const myString& _rank);
+	Jedai(const Jedai&);
+	const Jedai& operator=(const Jedai&);
+	Jedai(const char*, const char*, const size_t, const char*, const double);
 	Jedai(const myString&, const myString&, const int, const myString&, const double);
 
 	friend std::istream& operator>>(std::istream& in, Jedai&);
 	friend std::ostream& operator<<(std::ostream& out, const Jedai&);
-
-	//void ReadFromFile(const char* fileName, int& position);
 	void write_on_file(const char* fileName);
-
-
-	//ofstream& 
-//todo ofstram
 
 };

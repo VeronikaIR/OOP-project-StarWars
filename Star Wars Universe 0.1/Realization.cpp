@@ -29,7 +29,7 @@ int Realize::get_planetsSize()const {
 	return this->planets.get_curSize();
 }
 
-myString convertAllLettersToSmall(myString string) { // ObiWan obiwan
+myString convertAllLettersToSmall(myString string) {
 
 	myString newString;
 
@@ -43,36 +43,6 @@ myString convertAllLettersToSmall(myString string) { // ObiWan obiwan
 	}
 	return newString;
 }
-
-/*
-int compare_lexicographically(myString string1, int index_of_string1, myString string2, int index_of_string2) {
-
-	string1 = convertAllLettersToSmall(string1);
-	string2 = convertAllLettersToSmall(string2);
-
-	int i = 0;
-	while (string1[i] != '\0' && string2[i] != '\0') {
-
-		if (string1[i] != string2[i]) {
-
-			if (string1[i] > string2[i]) {
-
-				return index_of_string2;
-			}
-			else {
-				return index_of_string1;
-			}
-		}
-		i++;
-	}
-	if (string1.get_string_size() > string2.get_string_size()) {
-		return index_of_string1;
-	}
-	return index_of_string2;
-
-}
-*/
-
 
 void Realize::startUp() {
 
@@ -91,6 +61,10 @@ void Realize::startUp() {
 
 		if (command == "add_planet" && isOpend) {
 			myString planet_name = arg[1];
+			if (planet_name == "") {
+				std::cout << "Invalid planet name!" << std::endl;
+				exit(0);
+			}
 
 			try {
 				for (int i = 0; i < planets.get_curSize(); ++i) {
@@ -475,7 +449,7 @@ void Realize::startUp() {
 				if (planets[i].get_planetName() == planet_name) {
 					if (planets[i].get_jedaiList().get_curSize() > 0) {
 						for (int p = 0; p < planets[i].get_jedaiList().get_curSize(); ++p) {
-							if (planets[i].get_jedaiList()[p].get_jedai_rank() == determinRank(jedi_rank)) {
+							if (planets[i].get_jedaiList()[p].getRankChar() == jedi_rank) {
 								if (min_age >= planets[i].get_jedaiList()[p].get_jedai_age()) {
 									min_age = planets[i].get_jedaiList()[p].get_jedai_age();
 
@@ -499,7 +473,7 @@ void Realize::startUp() {
 			for (int i = 0; i < planets.get_curSize(); ++i) {
 				if (planets[i].get_planetName() == planet_name) {
 					for (int p = 0; p < planets[i].get_jedaiList().get_curSize(); ++p) {
-						if (planets[i].get_jedaiList()[p].get_jedai_rank() == determinRank(jedi_rank) && planets[i].get_jedaiList()[p].get_jedai_age() == min_age) {
+						if ((planets[i].get_jedaiList()[p].getRankChar() == jedi_rank) && planets[i].get_jedaiList()[p].get_jedai_age() == min_age) {
 							youngest_jedies.addElement(planets[i].get_jedaiList()[p]);
 							flag = true;
 						}
@@ -519,7 +493,7 @@ void Realize::startUp() {
 		}//end of get_youngest_jedi
 
 
-			  //get_most_used_saber_color(const char* planet_name, const char* jedi_rank)
+	   //get_most_used_saber_color(const char* planet_name, const char* jedi_rank)
 		else if (command == "get_most_used_saber_color" && isOpend) {
 
 
@@ -569,7 +543,7 @@ void Realize::startUp() {
 					if (planets[i].get_planetName() == planet_name) {
 						curPlanet = planets[i];
 						for (int p = 0; p < planets[i].get_jedaiList().get_curSize(); ++p) {
-							if (planets[i].get_jedaiList()[p].get_jedai_rank() == determinRank(jedi_rank)) {
+							if (planets[i].get_jedaiList()[p].getRankChar() == jedi_rank) {
 								if (planets[i].get_jedaiList()[p].get_saber_color() == "White") {
 									counter_white++;
 								}
@@ -887,13 +861,4 @@ void Realize::read_from_file(const myString& fileName) { //mystring
 		write_on_file(fileName);
 	}
 
-}
-
-
-void Realize::print()
-{
-	for (size_t i = 0; i < planets.get_curSize(); ++i)
-	{
-		std::cout << planets[i];
-	}
 }
