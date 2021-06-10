@@ -22,6 +22,7 @@ private:
 	size_t jedai_age;
 	myString saber_color;
 	double jedai_strenght;
+
 	void copy(const Jedai&);
 
 public:
@@ -44,13 +45,15 @@ public:
 	double get_jedai_strenght()const;
 	bool chekRank()const;
 	bool chekColor()const;
-	myString& getRankChar()const;
+	myString getRankChar()const;
 	Rank determinRank(const char* _rank);
 	Rank determinRank(const myString& _rank);
 	Jedai(const Jedai&);
 	const Jedai& operator=(const Jedai&);
 	Jedai(const char*, const char*, const size_t, const char*, const double);
 	Jedai(const myString&, const myString&, const int, const myString&, const double);
+
+	bool validateJedi();
 
 	friend std::istream& operator>>(std::istream& in, Jedai&);
 	friend std::ostream& operator<<(std::ostream& out, const Jedai&);

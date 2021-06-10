@@ -44,6 +44,7 @@ int Planet::get_sizeOfJedaiList()const {
 	return this->jedaiList.get_curSize();
 }
 
+
 myVector<Jedai>& Planet::get_jedaiList() {
 	return this->jedaiList;
 }

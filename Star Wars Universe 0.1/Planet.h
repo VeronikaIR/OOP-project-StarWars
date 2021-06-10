@@ -15,6 +15,8 @@ public:
 	void set_planetName(const char*);
 	void set_jedaiList(Jedai&);
 
+	//bool validateJedi(const Jedai& jedi);
+
 	int get_sizeOfJedaiList()const;
 	myVector<Jedai>& get_jedaiList();
 

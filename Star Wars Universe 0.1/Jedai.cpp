@@ -195,8 +195,11 @@ Rank Jedai::get_jedai_rank()const {
 	return this->jedai_rank;
 }
 
-myString& Jedai::getRankChar()const {
+
+myString Jedai::getRankChar()const { //?????
+
 	myString toReturn;
+
 	if (this->get_jedai_rank() == Rank::Youngling) {
 		toReturn.set_string("Youngling");
 		return toReturn;
@@ -230,6 +233,7 @@ myString& Jedai::getRankChar()const {
 		return toReturn;
 	}	
 }
+
 
 size_t Jedai::get_jedai_age()const {
 	return  this->jedai_age;
@@ -285,6 +289,24 @@ bool Jedai::chekColor()const {
 		return false;
 	}
 	else return true;
+}
+
+bool Jedai::validateJedi() {
+
+	bool flag = true;
+
+	if (this->jedai_name.chekString()) {}
+	else { flag = false; }
+	if(this->chekRank()){}
+	else { flag = false; }
+	if(this->jedai_age > 0){}
+	else { flag = false; }
+	if(saber_color.chekString() && chekColor()){}
+	else { flag = false; }
+	if(this->jedai_strenght > 0.0){}
+	else { flag = false; }
+	
+	return flag;
 }
 
 std::istream& operator>>(std::istream& in, Jedai& jedai) {

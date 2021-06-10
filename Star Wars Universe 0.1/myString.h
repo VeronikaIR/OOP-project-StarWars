@@ -16,7 +16,7 @@ private:
 public:
 	void set_string(const char*);
 	char* get_string()const;
-	int get_string_size()const;
+	size_t get_string_size()const;
 	myString();
 	myString(const myString&);
 	myString& operator=(const myString&);
@@ -34,6 +34,7 @@ public:
 	int toInt();
 	bool chekString()const;
 	bool isDigit()const;
+	bool isDigitInt()const;
 
 	friend std::istream& operator>>(std::istream&, myString&);
 	friend std::ostream& operator<<(std::ostream&, const myString&);

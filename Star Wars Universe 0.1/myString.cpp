@@ -28,24 +28,39 @@ void myString::copy(const myString& other) {
 }
 
 void myString::set_string(const char* _string) {
-	this->destroy();
+	//this->destroy();
+	int otherSize = strlen(_string);
 	this->string = new char[strlen(_string) + 1];
 	strcpy(this->string, _string);
 	this->string_size = strlen(_string);
+	this->string_capacity = otherSize;
 }
+
+/*
+void myString::setString(const char* data)
+{
+	int otherSize = strlen(data);
+	this->data = new char[otherSize + 1];
+
+	strcpy(this->data, data);
+
+	this->setSize(otherSize);
+	this->setCapacity(otherSize);
+}
+*/
 
 char* myString::get_string()const {
 	return this->string;
 }
 
-int myString::get_string_size()const {
+size_t myString::get_string_size()const {
 	return this->string_size;
 }
 
 myString::myString() {
 	this->string = nullptr;
 	this->string_size = 0;
-	this->string_capacity = 8; //???
+	this->string_capacity = 8;
 }
 
 
@@ -88,8 +103,8 @@ void myString::addElement(const char& x) {
 }
 
 void myString::addCharArr(const char* array) {
-	int prevSize = this->string_size;
-	int newSize = prevSize + strlen(array);
+	size_t prevSize = this->string_size;
+	size_t newSize = prevSize + strlen(array);
 
 	if (newSize >= this->string_capacity) {
 		while (newSize >= string_capacity) {
@@ -97,7 +112,7 @@ void myString::addCharArr(const char* array) {
 		}
 	}
 	int j = 0;
-	for (int i = prevSize; i < newSize; ++i) {
+	for (size_t i = prevSize; i < newSize; ++i) {
 		this->string[i] = array[j];
 		j++;
 	}
@@ -153,6 +168,7 @@ bool myString::operator>(const myString& other)const {
 		}
 		return true;
 	}
+	return false;
 }
 
 bool myString::operator==(const myString& st2)const {
@@ -210,7 +226,7 @@ int countParts(const myString& str, const char& symbol) {
 myVector<myString> myString::split(const char& symbol) {
 
 	int i = 0;
-	int countSpaces = countParts(*this, symbol);  //counter for spaces
+	int countSpaces = countParts(*this, symbol);
 
 	myVector<myString> vector;
 
@@ -256,7 +272,13 @@ int myString::toInt() {
 
 
 bool myString::chekString()const {
+
 	int curSize = this->get_string_size();
+
+	if (curSize == 0 ) {
+		//std::cout << "Error!Empty string!" << std::endl;
+		return false;
+	}
 
 	for (int i = 0; i < curSize; ++i) {
 		if ((this->string[i] >= 'A' && this->string[i] <= 'Z') || (this->string[i] >= 'a' && this->string[i] <= 'z') || (this->string[i] == '-')) {}
@@ -284,6 +306,21 @@ bool myString::isDigit()const {
 		return false;
 	}
 }
+
+bool myString::isDigitInt()const {
+	
+	int size = this->get_string_size();
+	for (int i = 0; i < size; ++i) {
+		if (this->string[i] >= '0' && this->string[i] <= '9'){}
+		else {
+			return false;
+		}
+	}
+	
+   return true;
+
+}
+
 
 std::istream& operator>>(std::istream& in, myString& _string) {
 	char buff[64];
